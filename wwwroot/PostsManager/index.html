@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chouettes News</title>
+   
     <link rel="site.webmanifest" href="manifest.json" />
     <link rel="icon" href="post_logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -18,9 +19,9 @@
         <div id="header">
             <img src="logo.webp" class="appLogo" alt="" title="Fils actualité">
             <h4 id="actionTitle">Chouette News</h4>
+            <i class="cmdIcon fa fa-plus" id="createPost" title="Ajouter un post"></i>
             <i class="cmdIcon fa fa-times" id="abort" title="Annuler"></i>
             <div class="dropdown ms-auto" >
-                <i class="cmdIcon fa fa-plus" id="createPost" title="Ajouter un post"></i>
                 <i for="searchKey" id="doSearch" class="cmdIcon fa fa-search" title ="Afficher la barre de recherche"></i>
                 <div data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="cmdIcon fa fa-ellipsis-vertical"></i>
@@ -40,18 +41,18 @@
                 <div id="itemsPanel">
                     <div class="postRow" id="sample">
                         <div class="postContainer noselect">
-                            <div class="postLayout">
+                            <div class="PostLayout">
                                 <div class="post">
                                     <a href="" target="_blank">sample </a>
-                                    <span class="postTitle">sample</span>
+                                    <span class="PostTitle">sample</span>
                                 </div>
-                                <span class="postCategory">sample Category</span>
+                                <span class="PostCategory">sample Category</span>
                             </div>
-                            <div class="postCommandPanel">
-                                <span class="editCmd cmdIcon fa fa-pencil" editpostId="${post.Id}"
-                                    title="Modifier ${post.Title}"></span>
-                                <span class="deleteCmd cmdIcon fa fa-trash" deletepostId="${post.Id}"
-                                    title="Effacer ${post.Title}"></span>
+                            <div class="PostCommandPanel">
+                                <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}"
+                                    title="Modifier ${Post.Title}"></span>
+                                <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}"
+                                    title="Effacer ${Post.Title}"></span>
                             </div>
                         </div>
                     </div>

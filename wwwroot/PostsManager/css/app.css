@@ -135,7 +135,7 @@
     margin-right: 80%;
 }
 
-.site_header{
+/*.site_header{
     background-color: rgb(226, 169, 64);
     width: 100%;
     display: flex;
@@ -145,7 +145,7 @@
     height: fit-content;
     overflow: auto;
 
-}
+}*/
 .site_header h1{
     margin-right: 5em;
 }

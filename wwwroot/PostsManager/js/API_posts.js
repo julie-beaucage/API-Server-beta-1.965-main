@@ -27,7 +27,7 @@ class API_Posts {
             });
         });
     }
-    static async Get_edit(id = null) {
+    static async Get(id = null) {
         API_Posts.initHttpState();
         return new Promise(resolve => {
             $.ajax({
@@ -37,7 +37,7 @@ class API_Posts {
             });
         });
     }
-    static async Get(queryString = "") {
+   /* static async Get(queryString = "") {
         API_Posts.initHttpState();
         return new Promise(resolve => {
             $.ajax({
@@ -46,7 +46,7 @@ class API_Posts {
                 error: (xhr) => { API_Posts.setHttpErrorState(xhr); resolve(null); }
             });
         });
-    }
+    }*/
     
 
    /* static async Get(id = null, query = "") {

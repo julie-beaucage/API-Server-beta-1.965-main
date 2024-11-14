@@ -1,4 +1,3 @@
-
 import * as utilities from './utilities.js';
 import Repository from './models/repository.js';
 import * as serverVariables from "./serverVariables.js";
@@ -69,4 +68,3 @@ export default class CachedRequestsManager {
         return false;
     }
 }
-

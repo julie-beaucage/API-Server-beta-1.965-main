@@ -43,9 +43,6 @@ async function Init_UI() {
     $("#searchKey").on("input", () => {
         doSearch();
     })
-   /* $('#doSearch').on('click', () => {
-        doSearch();
-    })*/
     $('#doSearch').on('click', () => {
         var searchInput = document.getElementById("search");
         if (searchInput.style.display === "none" || searchInput.style.display === "") {
@@ -54,19 +51,6 @@ async function Init_UI() {
             searchInput.style.display = "none"; 
         }
     })
-  /*  document.getElementById("search").addEventListener("click", function() {
-        var searchInput = document.getElementById("searchInput");
-        if (searchInput.style.display === "none" || searchInput.style.display === "") {
-            searchInput.style.display = "block"; 
-        } else {
-            searchInput.style.display = "none"; 
-        }
-    });
-
-    document.getElementById("searchInput").addEventListener("input", function() {
-        searchInput = this.value;
-        pageManager.reset();
-    });*/
     showPosts();
     start_Periodic_Refresh();
 }
@@ -165,6 +149,8 @@ async function compileCategories() {
     }
 }
 async function renderPosts(queryString) {
+    //let endOfData = false;
+    queryString += "&sort=category";
     if (selectedCategory != "") queryString += "&category=" + selectedCategory;
     if (search != "") queryString += "&keywords="+search;
     addWaitingGif();
@@ -186,7 +172,7 @@ async function renderPosts(queryString) {
                 renderDeletePostForm($(this).attr("deletePostId"));
             });
         } else
-           $("#itemsPanel").html('<div class="noPostsMessage">Aucun post disponible</div>');
+           //$("#itemsPanel").html('<div class="noPostsMessage">Aucun post disponible</div>');
             endOfData = true;
     } else {
         renderError(API_Posts.currentHttpError);
@@ -206,7 +192,7 @@ function renderCreatePostForm() {
 }
 async function renderEditPostForm(id) {
     addWaitingGif();
-    let response = await API_Posts.Get_edit(id)
+    let response = await API_Posts.Get(id)
     if (!API_Posts.error) {
         let Post = response.data;
         if (Post !== null)
@@ -223,7 +209,7 @@ async function renderDeletePostForm(id) {
     $("#actionTitle").text("Retrait");
     $('#PostForm').show();
     $('#PostForm').empty();
-    let response = await API_Posts.Get(id)
+    let response = await API_Posts.Get_edit(id)
     if (!API_Posts.error) {
         let Post = response.data;
         if (Post !== null) {
@@ -345,14 +331,14 @@ function renderPostForm(Post = null) {
     initFormValidation();
     $('#PostForm').on("submit", async function (event) {
         event.preventDefault();
-       let Post= getFormData($("#PostForm"));
-        Post = await Bookmarks_API.Save(Post, create);
-        /*let formData = new FormData(event.target);  
+        //let Post= getFormData($("#PostForm"));
+        //Post = await API_Posts.Save(Post, create);
+        let formData = new FormData(event.target);  
             let postData = {};
         formData.forEach((value, key) => {
             postData[key] = value;
         });
-        Post = await API_Posts.Save(postData, create);*/
+        Post = await API_Posts.Save(postData, create);
         if (!API_Posts.error) {
             showPosts();
             await pageManager.update(false);
@@ -365,6 +351,14 @@ function renderPostForm(Post = null) {
     $('#cancel').on("click", function () {
         showPosts();
     });
+}
+function getFormData($form) {
+    const removeTag = new RegExp("(<[a-zA-Z0-9]+>)|(</[a-zA-Z0-9]+>)", "g");
+    var jsonObject = {};
+    $.each($form.serializeArray(), (index, control) => {
+        jsonObject[control.name] = control.value.replace(removeTag, "");
+    });
+    return jsonObject;
 }
 function formatDate(creationTimestamp) {
     const creationDate = new Date(creationTimestamp);
