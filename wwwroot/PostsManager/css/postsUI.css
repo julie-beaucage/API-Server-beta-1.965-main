@@ -1,0 +1,83 @@
+
+.PostRow {
+    padding: 8px;
+    padding-bottom: 0px;
+}
+
+.PostContainer {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-items: top;
+    background-color: #eee;
+    border-radius: 6px;
+}
+
+.PostContainer .cmdIcon {
+    display: none;
+}
+
+.PostContainer:hover .cmdIcon {
+    display: block;
+}
+
+.PostLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 8px;
+    align-items: center;
+}
+
+.Post {
+    display: grid;
+    grid-template-columns: 30px auto;
+}
+
+.PostTitle {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: black;
+}
+
+.PostCategory {
+    color: dodgerblue !important;
+    font-weight: bold;
+}
+
+.PostCommandPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.PostdeleteForm {
+    margin: 20px;
+}
+.post-cover {
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+    height: 15rem;
+    box-shadow: inset hsla(0, 0, 0, .2) 0 64px 64px 16px;
+  }
+  .post-body {
+    margin: 0 auto;
+    width: 80%;
+  }
+  .post-title  {
+    color: #333;
+    font-weight: 100;
+  }
+  .PostTitle{
+    font-size: 2em;
+  }
+  .post-summary p {
+    color: lighten(#333, 10%);
+  }
+  .noPostsMessage {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    margin-top: 20px;
+}

@@ -1,0 +1,263 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+       supported by Chrome, Edge, Opera and Firefox */
+    cursor: default;
+}
+
+#main {
+    padding: 8px;
+    max-width: 1200px;
+    min-width: 360px;
+    min-height: 450px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+    height: 100vh;
+    background-color: rgb(183, 194, 218);
+    overflow-y: scroll;
+    overflow: hidden;
+
+}
+
+#header {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px; 
+    background-color: white;
+    border-radius: 9px;
+    align-items: center;
+    padding: 8px;
+   /* border: 1px solid #ccc;
+    display: grid;
+    grid-template-columns: 50px auto 50px 30px;
+    width: 100%;
+    padding: 8px;*/
+}
+
+#content {
+    height: 1px;
+    flex:1;
+    border: 1px solid #ccc;
+    backdrop-filter: blur(80%);
+    border-radius: 9px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.285);
+    padding-bottom: 8px; 
+}
+
+#forms {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+}
+
+#scrollPanel {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    scroll-snap-type: y mandatory;
+}
+#itemsPanel {
+    margin: auto;
+    width: 100%;
+    max-width: 1600px;
+}
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.waitingGifcontainer {
+    text-align: center;
+    margin: auto;
+}
+
+.waitingGif {
+    height: 100px;
+}
+
+.cmdIcon {
+    font-size: 1.5rem;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: rgb(0, 87, 204);
+    text-align: center;
+    margin: 8px;
+    cursor: pointer;
+}
+
+.menuIcon {
+    -webkit-text-fill-color: rgb(0, 87, 204);
+}
+
+.menuItemLayout {
+    display: grid;
+    grid-template-columns: 35px auto;
+    align-items: center;
+}
+
+.appLogo {
+    height: 70px;
+}
+.owlLogo{
+    width: 20%;
+    margin-right: 80%;
+}
+
+.site_header{
+    background-color: rgb(226, 169, 64);
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding:1em;
+    height: fit-content;
+    overflow: auto;
+
+}
+.site_header h1{
+    margin-right: 5em;
+}
+.search-container {
+    width: 100%; 
+    border: 1px solid #ddd;
+    background-color: #e0e0e0;
+}
+
+#searchKey {
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+#search {
+    display: none;
+    width: 100%;
+}
+.form-control .text{
+  width: 3em !important;
+}
+
+#Text{
+    height: 10em !important;
+    color:black;
+}
+
+.post-container {
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: hsla(0, 0, 0, .2) 0 4px 2px -2px;
+    font-family: "adelle-sans", sans-serif;
+    font-weight: 100;
+    margin: 48px auto;
+    width: 20rem;
+    @media screen and (min-width: 480px) {
+      width: 28rem;
+    }
+    @media screen and (min-width: 767px) {
+      width: 40rem;
+    }
+    @media screen and (min-width: 959px) {
+      width: 50rem;
+    }
+}
+@media screen and (min-width:650px) {
+
+    .PostLayout {
+        grid-template-columns: auto 30%;
+    }
+}
+
+form {
+    padding: 20px;
+    max-width: 350px;
+    margin: auto;
+}
+
+.errorContainer {
+    font-size: 1.2rem;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    color: red;
+    padding: 20px;
+}
+
+.aboutContainer {
+    padding: 20px;
+    text-align: center;
+}
+
+.aboutContainer p {
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+input {
+    margin-bottom: 20px !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: darkgreen !important;
+}
+
+.favicon {
+    text-align: center;
+    background-image: url("../Post_logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 24px;
+    width: 24px;
+    margin-right: 5px;
+}
+
+.big-favicon {
+    text-align: center;
+    background-image: url("../Post_logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 48px;
+    width: 48px;
+    margin-right: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.selected {
+    background-color: #ccc;
+}
