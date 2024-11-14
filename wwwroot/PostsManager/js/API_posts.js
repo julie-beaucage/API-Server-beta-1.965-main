@@ -27,6 +27,29 @@ class API_Posts {
             });
         });
     }
+    /*static async Get(id = null, queryString = "") {
+        API_Posts.initHttpState();
+            let url = this.API_URL();
+        if (id != null) {
+            url += "/" + id;  
+        }
+        if (queryString) {
+            url += (url.includes('?') ? '&' : '?') + queryString;
+        }
+        return new Promise(resolve => {
+            $.ajax({
+                url: url,
+                complete: data => {
+                    resolve({ ETag: data.getResponseHeader('ETag'), data: data.responseJSON });
+                },
+                error: (xhr) => {
+                    API_Posts.setHttpErrorState(xhr);
+                    resolve(null);
+                }
+            });
+        });
+    }
+    */
     static async Get(id = null) {
         API_Posts.initHttpState();
         return new Promise(resolve => {

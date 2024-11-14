@@ -50,7 +50,7 @@ export default class Model {
                 case "zipcode": return /^[a-zA-Z][0-9]+[a-zA-Z]\s[0-9]+[a-zA-Z][0-9]+$/.test(value);
                 case "date": return true; // todo make some syntax check
                 case "array": return true; // todo make validity check
-                case "asset": return /^data:image\/[a-zA-Z]+;base64,/.test(value); 
+                case "asset": return true; // todo make validity check
                 default: return false;
             }
         }

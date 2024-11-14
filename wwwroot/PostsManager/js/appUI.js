@@ -5,10 +5,11 @@ let currentETag = "";
 let hold_Periodic_Refresh = false;
 let pageManager;
 let itemLayout;
-
+let search = "";
 
 let waiting = null;
 let waitingGifTrigger = 2000;
+
 function addWaitingGif() {
     clearTimeout(waiting);
     waiting = setTimeout(() => {
@@ -38,9 +39,26 @@ async function Init_UI() {
     $('#aboutCmd').on("click", function () {
         renderAbout();
     });
+    $("#searchKey").on("input", () => {
+        doSearch();
+    })
+    $('#doSearch').on('click', () => {
+        var searchInput = document.getElementById("search");
+        if (searchInput.style.display === "none" || searchInput.style.display === "") {
+            searchInput.style.display = "block"; 
+        } else {
+            searchInput.style.display = "none"; 
+        }
+    })
     showPosts();
     start_Periodic_Refresh();
 }
+
+function doSearch() {
+    search = $("#searchKey").val().replace(' ', ',');
+    pageManager.reset();
+}
+
 function showPosts() {
     $("#actionTitle").text("Liste des favoris");
     $("#scrollPanel").show();
@@ -130,8 +148,11 @@ async function compileCategories() {
 }
 async function renderPosts(queryString) {
     let endOfData = false;
-    queryString += "&sort=category";
+    //queryString += "&sort=category";
+    queryString += "&sort=Creation";
     if (selectedCategory != "") queryString += "&category=" + selectedCategory;
+    if (search != "") queryString += "&keywords="+search;
+
     addWaitingGif();
     let response = await API_Posts.Get(queryString);
     if (!API_Posts.error) {
@@ -181,6 +202,14 @@ async function renderEditPostForm(id) {
     }
     removeWaitingGif();
 }
+/*async function renderEditContactForm(id) {
+    showWaitingGif();
+    let contact = await API_GetContact(id);
+    if (contact !== null)
+        renderContactForm(contact);
+    else
+        renderError("Contact introuvable!");
+}*/
 async function renderDeletePostForm(id) {
     hidePosts();
     $("#actionTitle").text("Retrait");
@@ -235,14 +264,7 @@ async function renderDeletePostForm(id) {
     } else
         renderError(API_Posts.currentHttpError);
 }
-/*function getFormData($form) {
-    const removeTag = new RegExp("(<[a-zA-Z0-9]+>)|(</[a-zA-Z0-9]+>)", "g");
-    var jsonObject = {};
-    $.each($form.serializeArray(), (index, control) => {
-        jsonObject[control.name] = control.value.replace(removeTag, "");
-    });
-    return jsonObject;
-}*/
+
 function newPost() {
     Post = {};
     Post.Id = 0;
@@ -314,12 +336,19 @@ function renderPostForm(Post = null) {
     initFormValidation();
     $('#PostForm').on("submit", async function (event) {
         event.preventDefault();
-        //let Post = getFormData($("#PostForm"));
+       // let Post = getFormData($("#PostForm"));
+        
         let formData = new FormData(event.target);  
         let postData = {};
         formData.forEach((value, key) => {
             postData[key] = value;
         });
+
+
+        if (!create) {
+            postData["Creation"] = new Date().getTime();
+        }
+
         Post = await API_Posts.Save(postData, create);
 
 
