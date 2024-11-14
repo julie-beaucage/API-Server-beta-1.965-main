@@ -1,16 +1,14 @@
-
-const periodicRefreshPeriod = 100000;
+const periodicRefreshPeriod = 10;
 let categories = [];
 let selectedCategory = "";
-let search = "";
 let currentETag = "";
 let hold_Periodic_Refresh = false;
 let pageManager;
 let itemLayout;
 
+
 let waiting = null;
 let waitingGifTrigger = 2000;
-
 function addWaitingGif() {
     clearTimeout(waiting);
     waiting = setTimeout(() => {
@@ -40,32 +38,14 @@ async function Init_UI() {
     $('#aboutCmd').on("click", function () {
         renderAbout();
     });
-    $("#searchKey").on("input", () => {
-        doSearch();
-    })
-    $('#doSearch').on('click', () => {
-        var searchInput = document.getElementById("search");
-        if (searchInput.style.display === "none" || searchInput.style.display === "") {
-            searchInput.style.display = "block"; 
-        } else {
-            searchInput.style.display = "none"; 
-        }
-    })
     showPosts();
     start_Periodic_Refresh();
 }
-
-function doSearch() {
-    search = $("#searchKey").val().replace(' ', ',');
-    pageManager.reset();
-}
-
 function showPosts() {
-    $("#actionTitle").text("Chouettes Nouvelles");
+    $("#actionTitle").text("Liste des favoris");
     $("#scrollPanel").show();
     $('#abort').hide();
     $('#PostForm').hide();
-    $("#search").show();
     $('#aboutContainer').hide();
     $("#createPost").show();
     hold_Periodic_Refresh = false;
@@ -149,12 +129,10 @@ async function compileCategories() {
     }
 }
 async function renderPosts(queryString) {
-    //let endOfData = false;
+    let endOfData = false;
     queryString += "&sort=category";
     if (selectedCategory != "") queryString += "&category=" + selectedCategory;
-    if (search != "") queryString += "&keywords="+search;
     addWaitingGif();
-    let endOfData = true;
     let response = await API_Posts.Get(queryString);
     if (!API_Posts.error) {
         currentETag = response.ETag;
@@ -172,7 +150,6 @@ async function renderPosts(queryString) {
                 renderDeletePostForm($(this).attr("deletePostId"));
             });
         } else
-           //$("#itemsPanel").html('<div class="noPostsMessage">Aucun post disponible</div>');
             endOfData = true;
     } else {
         renderError(API_Posts.currentHttpError);
@@ -209,7 +186,7 @@ async function renderDeletePostForm(id) {
     $("#actionTitle").text("Retrait");
     $('#PostForm').show();
     $('#PostForm').empty();
-    let response = await API_Posts.Get_edit(id)
+    let response = await API_Posts.Get(id)
     if (!API_Posts.error) {
         let Post = response.data;
         if (Post !== null) {
@@ -258,7 +235,14 @@ async function renderDeletePostForm(id) {
     } else
         renderError(API_Posts.currentHttpError);
 }
-
+/*function getFormData($form) {
+    const removeTag = new RegExp("(<[a-zA-Z0-9]+>)|(</[a-zA-Z0-9]+>)", "g");
+    var jsonObject = {};
+    $.each($form.serializeArray(), (index, control) => {
+        jsonObject[control.name] = control.value.replace(removeTag, "");
+    });
+    return jsonObject;
+}*/
 function newPost() {
     Post = {};
     Post.Id = 0;
@@ -272,13 +256,11 @@ function newPost() {
 function renderPostForm(Post = null) {
     hidePosts();
     let create = Post == null;
-    if (create){
-     Post = newPost();
-     Post.Image = "images/no-avatar.png";
-    }
+    if (create)
+        Post = newPost();
+
     $("#actionTitle").text(create ? "Création" : "Modification");
     $("#PostForm").show();
-    $("#search").hide();
     $("#PostForm").empty();
     $("#PostForm").append(`
         <form class="form" id="PostForm">
@@ -314,6 +296,7 @@ function renderPostForm(Post = null) {
                 value=${Post.Text}/>
                 ${Post.Text}
             </textarea>
+            
             <label class="form-label">Image </label>
             <div   class='imageUploader' 
                    newImage='${create}' 
@@ -331,14 +314,26 @@ function renderPostForm(Post = null) {
     initFormValidation();
     $('#PostForm').on("submit", async function (event) {
         event.preventDefault();
-        //let Post= getFormData($("#PostForm"));
-        //Post = await API_Posts.Save(Post, create);
+        //let Post = getFormData($("#PostForm"));
         let formData = new FormData(event.target);  
-            let postData = {};
+        let postData = {};
         formData.forEach((value, key) => {
             postData[key] = value;
         });
         Post = await API_Posts.Save(postData, create);
+
+
+        /*let formData = new FormData();
+        for (let key in postData) {
+            formData.append(key, postData[key]);
+        }
+        const imageFile = document.getElementById("Image").files[0];
+        if (imageFile) {
+            formData.append("Image", imageFile);
+        }
+        let savedPost = await API_Posts.Save(formData, create);*/
+        
+        //Post = await API_Posts.Save(Post, create);
         if (!API_Posts.error) {
             showPosts();
             await pageManager.update(false);
@@ -352,14 +347,7 @@ function renderPostForm(Post = null) {
         showPosts();
     });
 }
-function getFormData($form) {
-    const removeTag = new RegExp("(<[a-zA-Z0-9]+>)|(</[a-zA-Z0-9]+>)", "g");
-    var jsonObject = {};
-    $.each($form.serializeArray(), (index, control) => {
-        jsonObject[control.name] = control.value.replace(removeTag, "");
-    });
-    return jsonObject;
-}
+
 function formatDate(creationTimestamp) {
     const creationDate = new Date(creationTimestamp);
     return creationDate.toLocaleDateString('fr-FR', { 
@@ -371,14 +359,22 @@ function formatDate(creationTimestamp) {
         minute: '2-digit'
     });
 }
+function getFormData($form) {
+    const removeTag = new RegExp("(<[a-zA-Z0-9]+>)|(</[a-zA-Z0-9]+>)", "g");
+    var jsonObject = {};
+    $.each($form.serializeArray(), (index, control) => {
+        jsonObject[control.name] = control.value.replace(removeTag, "");
+    });
+    return jsonObject;
+}
 
 function renderPost(Post) {
     const formattedDate = formatDate(Post.Creation);
     return $(`
-     <div class="post-row" id='${Post.Id}'>
-        <div class="post-container noselect">
+     <div class="PostRow" id='${Post.Id}'>
+        <div class="PostContainer noselect">
             <div class="PostLayout">
-                <div class="post-cover" style="background-image:url('${Post.Image}')"></div>
+                <div class="Post post-cover" style="background-image:url('${Post.Image}')"></div>
                 <div ="post-body">
                    <div class="post-title">
                       <span class="PostTitle">${Post.Title}</span>
