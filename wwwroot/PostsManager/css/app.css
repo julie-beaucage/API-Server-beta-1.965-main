@@ -198,28 +198,7 @@
 #charCount.limit-reached {
     color: red;
 }
-::-webkit-input-placeholder {
-    
-}
 
-.post-container {
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: hsla(0, 0, 0, .2) 0 4px 2px -2px;
-    font-family: "adelle-sans", sans-serif;
-    font-weight: 100;
-    margin: 48px auto;
-    width: 20rem;
-    @media screen and (min-width: 480px) {
-      width: 28rem;
-    }
-    @media screen and (min-width: 767px) {
-      width: 40rem;
-    }
-    @media screen and (min-width: 959px) {
-      width: 50rem;
-    }
-}
 @media screen and (min-width:650px) {
 
     .PostLayout {

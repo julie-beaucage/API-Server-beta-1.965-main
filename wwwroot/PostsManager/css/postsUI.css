@@ -6,13 +6,65 @@
 
 .PostContainer {
     /*display: grid;*/
-    grid-template-columns: 4fr 1fr;
+   /* grid-template-columns: 4fr 1fr;
     align-items: top;
     background-color: #eee;
     border-radius: 6px;
-    margin-bottom: 2em;
+    margin-bottom: 2em;*/
 }
 
+.PostContainer {
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: hsla(0, 0, 0, .2) 0 4px 2px -2px;
+    font-family: "adelle-sans", sans-serif;
+    font-weight: 100;
+    margin: 48px auto;
+    width: 20rem;
+    @media screen and (min-width: 480px) {
+      width: 28rem;
+    }
+    @media screen and (min-width: 767px) {
+      width: 40rem;
+    }
+    @media screen and (min-width: 959px) {
+      width: 50rem;
+    }
+}
+
+.post-footer{
+    margin: 0 auto;
+    padding-bottom: 0.125rem;
+    width: 80%;
+}
+.post-footer ul {
+    list-style: none;
+    display: flex;
+    flex: row wrap;
+    justify-content: flex-end;
+    padding-left: 0;
+  }
+
+.post-footer li:first-child {
+    margin-right: auto;
+  }
+.post-footer li + li {
+    margin-left: .5rem;
+  }
+.post-footer li {
+    color: lighten(#333, 40%);
+    font-size: .75rem;
+    height: 1.5rem;
+    letter-spacing: 1px;
+    line-height: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    white-space: nowrap;
+    & a {
+      color: lighten(#333, 40%);
+    }
+  }
 textarea {/*
     padding: 0 !important;
     margin: 0 !important;

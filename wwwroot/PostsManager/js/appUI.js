@@ -404,12 +404,7 @@ function renderPost(Post) {
      <div class="PostRow" id='${Post.Id}'>
         <div class="PostContainer noselect">
             <div class="PostLayout">
-            
-                <div class="Post post-cover" style="background-image:url('${Post.Image}')">
-                            <div class="PostCommandPanel">
-                <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></span>
-                <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}" title="Effacer ${Post.Title}"></span>
-            </div>
+              <div class="post-cover" style="background-image:url('${Post.Image}')"></div>
             </div>
                 <div class ="post-body">
                    <div class="post-title">
@@ -420,12 +415,14 @@ function renderPost(Post) {
                      <p>${Post.Text}</span>
                     </div>
                 <hr>
-                <span> Publié: ${formattedDate}</span>  
             </div>
-            <div class="PostCommandPanel">
-                <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></span>
-                <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}" title="Effacer ${Post.Title}"></span>
-            </div>
+            <div class="post-footer">
+            <ul>
+                <li> Publié: ${formattedDate}</li>  
+                <li class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></li>
+                <li class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}" title="Effacer ${Post.Title}"></li>
+            </ul>
+                </div>
         </div>
     </div>           
     `);
