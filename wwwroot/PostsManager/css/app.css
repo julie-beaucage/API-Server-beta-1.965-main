@@ -111,7 +111,13 @@
 .cmdIcon {
     font-size: 1.5rem;
     -webkit-text-stroke-color: white;
-    -webkit-text-fill-color: rgb(0, 87, 204);
+    -webkit-text-fill-color: rgb(81, 145, 162);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.345);
+    -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+    padding: 0.2em;
+    border-radius: 0.5em;
     text-align: center;
     margin: 8px;
     cursor: pointer;
@@ -145,17 +151,6 @@
     height: 70px;
 }
 
-/*.site_header{
-    background-color: rgb(226, 169, 64);
-    width: 100%;
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    padding:1em;
-    height: fit-content;
-    overflow: auto;
-
-}*/
 .site_header h1{
     margin-right: 5em;
 }
@@ -183,12 +178,6 @@
 #Text{
     width: 100% !important; 
     height: 300px !important; 
-    /*padding: 0 !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    width: 100% !important; 
-    height: 100px !important; 
-    resize: none !important; */
 }
 #charCount {
     font-size: 12px;
