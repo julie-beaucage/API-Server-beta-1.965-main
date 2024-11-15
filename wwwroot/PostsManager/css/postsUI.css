@@ -10,6 +10,7 @@
     align-items: top;
     background-color: #eee;
     border-radius: 6px;
+    margin-bottom: 2em;
 }
 
 textarea {/*
@@ -58,33 +59,38 @@ textarea {/*
     flex-direction: row;
     justify-content: flex-end;
     gap: 8px;
+    border:solid 2px black;
 }
 
 .PostdeleteForm {
     margin: 20px;
 }
+
 .post-cover {
     background-size: cover;
     object-fit: cover;
     border-radius: 5px 5px 0 0;
     height: 15rem;
     box-shadow: inset hsla(0, 0, 0, .2) 0 64px 64px 16px;
-  }
-  .post-body {
+}
+.post-body {
     margin: 0 auto;
     width: 80%;
-  }
-  .post-title  {
+}
+.post-title  {
     color: #333;
     font-weight: 100;
-  }
-  .PostTitle{
+}
+
+.PostTitle{
     font-size: 2em;
-  }
-  .post-summary p {
+}
+
+.post-summary p {
     color: lighten(#333, 10%);
-  }
-  .noPostsMessage {
+}
+
+.noPostsMessage {
     text-align: center;
     font-size: 18px;
     color: #888;

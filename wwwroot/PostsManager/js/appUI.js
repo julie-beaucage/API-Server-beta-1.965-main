@@ -344,10 +344,13 @@ function renderPostForm(Post = null) {
     `);
   const textarea = document.getElementById('Text');
   const charCount = document.getElementById('charCount');
-  const maxLength =1000; 
+  const maxLength =1000;
+  
+  let currentLength = textarea.value.length;
+  charCount.textContent = `${currentLength} / ${maxLength} caractères`;
+
   $("#Text").on("input", () => {
-    doCountChar();
-    const currentLength = textarea.value.length;
+    currentLength = textarea.value.length;
     charCount.textContent = `${currentLength} / ${maxLength} caractères`;
    });
   initImageUploaders();
@@ -369,10 +372,6 @@ function renderPostForm(Post = null) {
     $("#cancel").on("click", function () {
         showPosts();
     });
-}
-
-function doCountChar() {
-
 }
 
 function formatDate(creationTimestamp) {
@@ -405,8 +404,14 @@ function renderPost(Post) {
      <div class="PostRow" id='${Post.Id}'>
         <div class="PostContainer noselect">
             <div class="PostLayout">
-                <div class="Post post-cover" style="background-image:url('${Post.Image}')"></div>
-                <div ="post-body">
+            
+                <div class="Post post-cover" style="background-image:url('${Post.Image}')">
+                            <div class="PostCommandPanel">
+                <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></span>
+                <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}" title="Effacer ${Post.Title}"></span>
+            </div>
+            </div>
+                <div class ="post-body">
                    <div class="post-title">
                       <span class="PostTitle">${Post.Title}</span>
                    </div>
