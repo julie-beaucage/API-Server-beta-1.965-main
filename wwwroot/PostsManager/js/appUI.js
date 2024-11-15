@@ -20,6 +20,7 @@ function addWaitingGif() {
     );
   }, waitingGifTrigger);
 }
+
 function removeWaitingGif() {
   clearTimeout(waiting);
   $("#waitingGif").remove();
@@ -48,11 +49,11 @@ async function Init_UI() {
     });
     $("#doSearch").on("click", () => {
       var searchInput = document.getElementById("search");
-    if (searchInput.style.display === "none" ||searchInput.style.display === "") {
-      searchInput.style.display = "block";
-    } else {
-      searchInput.style.display = "none";
-    }
+      if (searchInput.style.display === "none" ||searchInput.style.display === "") {
+        searchInput.style.display = "block";
+      } else {
+        searchInput.style.display = "none";
+      }
     });
     showPosts();
     start_Periodic_Refresh();
@@ -69,12 +70,14 @@ function showPosts() {
   $("#abort").hide();
   $("#postForm").hide();
   $("#aboutContainer").hide();
+  $("#doSearch").show();
   $("#createPost").show();
   hold_Periodic_Refresh = false;
 }
 function hidePosts() {
   $("#scrollPanel").hide();
   $("#createPost").hide();
+  $("#doSearch").hide();
   $("#abort").show();
   hold_Periodic_Refresh = true;
 }
@@ -179,7 +182,7 @@ async function renderPosts(queryString) {
             renderDeletePostForm($(this).attr("deletePostId"));
         });
         } else {
-            $("#itemsPanel").html('<div class="noPostsMessage">Aucun post disponible</div>');
+            //$("#itemsPanel").html('<div class="noPostsMessage">Aucun post disponible</div>');
             endOfData = true;
         }
     } else {
@@ -283,12 +286,12 @@ function newPost() {
   return Post;
 }
 function renderPostForm(Post = null) {
-   hidePosts();
-   let create = Post == null;
-   if (create) 
+    hidePosts();
+    let create = Post == null;
+    if (create){
       Post = newPost();
       Post.Image = "images/no_image.png";
-
+    }
     $("#actionTitle").text(create ? "Création" : "Modification");
     $("#postForm").show();
     $("#postForm").empty();
@@ -321,8 +324,11 @@ function renderPostForm(Post = null) {
               class="form-control text"
               name="Text"
               id="Text"
-              placeholder="Entrez votre texte" 
+              placeholder="Entrez votre texte"
+              maxlength="1000" 
               required>${Post.Text}</textarea>
+              <span id="charCount">0 / 1000 caractères</span> 
+            <br>
             <label class="form-label">Image </label>
             <div   class='imageUploader' 
                    newImage='${create}' 
@@ -336,12 +342,20 @@ function renderPostForm(Post = null) {
             <input type="button" value="Annuler" id="cancel" class="btn btn-secondary">
         </form>
     `);
+  const textarea = document.getElementById('Text');
+  const charCount = document.getElementById('charCount');
+  const maxLength =1000; 
+  $("#Text").on("input", () => {
+    doCountChar();
+    const currentLength = textarea.value.length;
+    charCount.textContent = `${currentLength} / ${maxLength} caractères`;
+   });
   initImageUploaders();
   initFormValidation();
+
   $("#PostForm").on("submit", async function (event) {
         event.preventDefault();
         let Post = getFormData($("#PostForm"));
-        console.log(Post);
         Post = await API_Posts.Save(Post, create);
         if (!API_Posts.error) {
             showPosts();
@@ -355,7 +369,11 @@ function renderPostForm(Post = null) {
     $("#cancel").on("click", function () {
         showPosts();
     });
-    }
+}
+
+function doCountChar() {
+
+}
 
 function formatDate(creationTimestamp) {
   const creationDate = new Date(creationTimestamp);

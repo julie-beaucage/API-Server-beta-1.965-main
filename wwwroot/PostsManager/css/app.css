@@ -134,20 +134,15 @@
     border-radius: .25rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     cursor: pointer;
-    width: 296px;
-    height: 197px;
     text-align: center;
 }
+
 .imageUploader:hover{
     background-color: #b7cceb;
 
 }
 .appLogo {
     height: 70px;
-}
-.owlLogo{
-    width: 20%;
-    margin-right: 80%;
 }
 
 /*.site_header{
@@ -186,15 +181,25 @@
 }
 
 #Text{
-    padding: 0 !important;
+    width: 100% !important; 
+    height: 300px !important; 
+    /*padding: 0 !important;
     margin: 0 !important;
     box-sizing: border-box !important;
     width: 100% !important; 
     height: 100px !important; 
-    resize: none !important; 
+    resize: none !important; */
+}
+#charCount {
+    font-size: 12px;
+    color: gray;
+}
+
+#charCount.limit-reached {
+    color: red;
 }
 ::-webkit-input-placeholder {
-    text-align: center;
+    
 }
 
 .post-container {
