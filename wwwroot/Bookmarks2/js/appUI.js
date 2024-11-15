@@ -313,6 +313,7 @@ function renderBookmarkForm(Bookmark = null) {
     $('#BookmarkForm').on("submit", async function (event) {
         event.preventDefault();
         let Bookmark = getFormData($("#BookmarkForm"));
+        console.log(Bookmark);
         Bookmark = await Bookmarks_API.Save(Bookmark, create);
         if (!Bookmarks_API.error) {
             showBookmarks();

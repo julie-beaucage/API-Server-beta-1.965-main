@@ -12,6 +12,15 @@
     border-radius: 6px;
 }
 
+textarea {/*
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important; 
+    height: 100px !important; 
+    resize: none !important; */
+}
+
 .PostContainer .cmdIcon {
     display: none;
 }

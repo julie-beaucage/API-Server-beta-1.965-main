@@ -126,7 +126,22 @@
     grid-template-columns: 35px auto;
     align-items: center;
 }
+.imageUploader{
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    cursor: pointer;
+    width: 296px;
+    height: 197px;
+    text-align: center;
+}
+.imageUploader:hover{
+    background-color: #b7cceb;
 
+}
 .appLogo {
     height: 70px;
 }
@@ -171,8 +186,15 @@
 }
 
 #Text{
-    height: 10em !important;
-    color:black;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important; 
+    height: 100px !important; 
+    resize: none !important; 
+}
+::-webkit-input-placeholder {
+    text-align: center;
 }
 
 .post-container {

@@ -214,6 +214,7 @@ function renderContactForm(contact = null) {
     $('#contactForm').on("submit", async function (event) {
         event.preventDefault();
         let contact = getFormData($("#contactForm"));
+        console.log(contact.avatar);
         showWaitingGif();
         let result = await API_SaveContact(contact, create);
         if (result)
