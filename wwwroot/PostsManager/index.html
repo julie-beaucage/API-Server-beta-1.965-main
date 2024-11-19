@@ -40,23 +40,35 @@
         <div id="content">
             <div id="scrollPanel">
                 <div id="itemsPanel">
-                    <div class="postRow" id="sample">
+                    <div class="PostRow" id="sample">
                         <div class="PostContainer noselect">
                             <div class="PostLayout">
-                                <div class="post">
-                                    <a href="" target="_blank">sample </a>
-                                    <span class="PostTitle">sample</span>
+                                <div class="Post">
+                                    <div class="header_post">
+                                        <img src="${Post.Image}" alt="${Post.Title}" class="post-cover-img" />      
+                                        <div class="post-icons">
+                                          <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}"title="Modifier ${Post.Title}"></span>
+                                          <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}"title="Effacer ${Post.Title}"></span>
+                                        </div>
+                                    </div>
+                                    <div class ="post-body">
+                                        <div class="post-title">
+                                          <span class="PostTitle">${Post.Title}</span>
+                                        </div>
+                                        <span class="PostCategory">${Post.Category}</span>
+                                        <div class="post-summary">
+                                          <p class="post-text">${formattedText}</p>
+                                          <button class="read-more-btn">Lire plus</button>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                   <div class="post-footer">
+                                      <span> Publié: ${formattedDate}</span>  
+                                    </div>
                                 </div>
-                                <span class="PostCategory">sample Category</span>
-                            </div>
-                            <div class="PostCommandPanel">
-                                <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}"
-                                    title="Modifier ${Post.Title}"></span>
-                                <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}"
-                                    title="Effacer ${Post.Title}"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
             <div id="forms">
