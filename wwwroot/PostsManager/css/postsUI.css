@@ -138,5 +138,12 @@
     white-space: nowrap;
   }
   @media screen and (max-width: 600px){
+    .tag{
+        border-radius: 1em;
+        background-color: dodgerblue;
+        color: white;
+        padding:0.3em;
+        font-size:0.7rem ;
+    }
   
 }

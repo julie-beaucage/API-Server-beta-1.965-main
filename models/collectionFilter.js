@@ -254,10 +254,10 @@ export default class collectionFilter {
                     if (field.type == "string")
                         record += item[field.name].toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') + " ";
                 }
-                let keep = false;
+                let keep = true;
                 for (let keyword of this.keywords) {
-                    if (record.indexOf(keyword.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')) != -1) {
-                        keep = true;
+                    if (record.indexOf(keyword.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')) == -1) {
+                        keep = false;
                         break;
                     }
                 }

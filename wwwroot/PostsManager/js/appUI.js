@@ -52,6 +52,7 @@ async function Init_UI() {
       searchInput.style.display = "none";
     }
   });
+  $("#show_category").hide();
   initReadMore();
   showPosts();
   start_Periodic_Refresh();
@@ -65,7 +66,11 @@ function doSearch() {
 function showPosts() {
   $("#actionTitle").text("Chouettes Nouvelles");
   $("#scrollPanel").show();
-  $("#show_category").text(`${selectedCategory}`); 
+  if (selectedCategory!=""||"Toutes les catégories") {
+    $("#show_category").text(`${selectedCategory}`).show(); 
+  } else {
+    $("#show_category").hide();
+  }
   $("#abort").hide();
   $("#postForm").hide();
   $("#aboutContainer").hide();
@@ -128,7 +133,7 @@ function updateDropDownMenu() {
     showPosts();
     selectedCategory = "";
     updateDropDownMenu();
-    $("#show_category").text("Toutes les catégories"); 
+    $("#show_category").hide(); 
     pageManager.reset();
   });
   $(".category").on("click", function () {
