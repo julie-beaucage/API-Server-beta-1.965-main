@@ -55,6 +55,7 @@ async function Init_UI() {
         searchInput.style.display = "none";
       }
     });
+    initReadMore();
     showPosts();
     start_Periodic_Refresh();
 }
@@ -170,6 +171,7 @@ async function renderPosts(queryString) {
             Posts.forEach((Post) => {
               $("#itemsPanel").append(renderPost(Post));
             });
+            initReadMore(); 
             $(".editCmd").off();
             $(".editCmd").on("click", function () {
                 renderEditPostForm($(this).attr("editPostId"));
@@ -182,12 +184,7 @@ async function renderPosts(queryString) {
           } else if(isReset) {
             $("#itemsPanel").html(
                 `<div class="noPostsMessage">Aucun post dans la catégorie "${selectedCategory || "toutes les catégories"}" avec la recherche "${search || "aucun mot-clé"}".</div>`
-            );//{
-            /*if (selectedCategory || search) {
-              $("#itemsPanel").html(
-                  `<div class="noPostsMessage">Aucun post dans la catégorie "${selectedCategory || "toutes les catégories"}" avec la recherche "${search || "aucun mot-clé"}".</div>`
-              );
-              }*/
+            );
               endOfData = true;
           }
       } else {
@@ -296,6 +293,8 @@ function renderPostForm(Post = null) {
     if (create){
       Post = newPost();
       Post.Image = "images/no_image.png";
+    }else{
+      Post.Creation=new Date().getTime();
     }
     $("#actionTitle").text(create ? "Création" : "Modification");
     $("#postForm").show();
@@ -408,13 +407,40 @@ function initReadMore() {
     const $postText = $postSummary.find('p');
 
     if ($postText.hasClass('expanded')) {
-      $postText.removeClass('expanded').css('max-height', '60px'); 
+      $postText.removeClass('expanded').css('max-height', '60px');
       $(this).text('Lire plus');
     } else {
-      $postText.addClass('expanded').css('max-height', 'none'); 
+      $postText.addClass('expanded').css('max-height', 'none');
       $(this).text('Lire moins');
     }
   });
+
+  $('.post-summary').each(function () {
+    const $postSummary = $(this);
+    const $readMoreBtn = $postSummary.find('.read-more-btn');
+
+    if (checkOverflow($postSummary)) {
+      $readMoreBtn.show();
+    } else {
+      $readMoreBtn.hide();
+    }
+  });
+}
+
+function checkOverflow($postSummary) {
+  const $postText = $postSummary.find('p');
+  $postText.css('max-height', '60px');  
+  return $postText[0].scrollHeight > $postText.outerHeight(); 
+}
+
+function checkOverflow($postSummary) {
+  const $postText = $postSummary.find('p'); 
+  $postText.css('max-height', '60px'); 
+  const scrollHeight = $postText[0].scrollHeight; 
+  const outerHeight = $postText.outerHeight();
+  const margin = 5;
+
+  return scrollHeight - outerHeight > margin;
 }
 
 function renderPost(Post) {

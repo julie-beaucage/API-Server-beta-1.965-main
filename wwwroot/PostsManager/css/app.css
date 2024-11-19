@@ -194,7 +194,6 @@
 }
 
 @media screen and (max-width: 600px){
-
     .PostLayout {
         grid-template-columns: auto 30%;
     }

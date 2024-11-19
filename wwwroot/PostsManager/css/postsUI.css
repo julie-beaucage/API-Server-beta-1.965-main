@@ -28,52 +28,27 @@
 .PostRow {
     padding: 8px;
     padding-bottom: 0px;
+
 }
 
 .PostContainer {
-    /*position: relative;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: hsla(0, 0, 0, .2) 0 4px 2px -2px;
-    font-family: "adelle-sans", sans-serif;
-    font-weight: 100;
-    margin: 2em auto;
-    width: 30rem;
-    min-width: fit-content;*/
     display: grid;
-    /*grid-template-columns: 4fr 1fr;*/
     align-items: top;
     background-color: #eee;
     border-radius: 6px;
+    max-width: 30em;
+    margin: 2em auto;
 }
-.Post{
-    /*display: grid;
-    grid-template-columns: 30px auto;*/
-}
-
 .header_post{
     position: relative; 
     width: 100%; 
     overflow: hidden; 
     border-radius: 5px 5px 0 0; 
     box-shadow: inset hsla(0, 0, 0, .2) 0 64px 64px 16px;
-    height: 15rem;
-    box-shadow: inset hsla(0, 0, 0, .2) 0 64px 64px 16px;
-    
+    height: 15rem; 
 }
-.PostLayout {
-  /*  display: grid;
-    /*grid-template-columns: 1fr;*/
-    /*padding: 10px;
-    gap: 8px;
-    align-items: center;*/
-}
+
 .post-cover {
-    /*max-height: 20em;
-    border-radius: 5px 5px 0 0;
-    box-shadow: inset hsla(0, 0, 0, .2) 0 64px 64px 16px;
-    min-height: fit-content;
-    position: relative;*/
     position: relative; 
     width: 100%; 
     overflow: hidden; 
@@ -143,6 +118,9 @@
     border-radius: 5px;
     font-size: 14px;
   }
+.read-more-btn:hover{
+    background-color: #7bb0e9;
+}
 .post-footer{
     margin: 0 auto;
     padding-bottom: 0.125rem;
@@ -159,22 +137,6 @@
     position: relative;
     white-space: nowrap;
   }
-@media screen and (min-width: 360px) {
-    .PostContainer {
-
-        background-color: rgb(255, 149, 0) !important;
-    }
-}
-@media screen and (min-width: 767px) {
-    .PostContainer {
-
-        background-color: yellow!important;;
-    }
-}
-
-@media screen and (min-width: 959px) {
-    .PostContainer {
-
-        background-color: blue!important;;
-    }
+  @media screen and (max-width: 600px){
+  
 }
