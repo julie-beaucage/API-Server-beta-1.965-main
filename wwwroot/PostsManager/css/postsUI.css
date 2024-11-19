@@ -12,10 +12,10 @@
 }
 
 .tag{
-    border-radius: 2em;
+    border-radius: 1em;
     background-color: dodgerblue;
     color: white;
-    padding:2px
+    padding:0.5em;
 }
 
 .noPostsMessage {
