@@ -52,7 +52,6 @@ async function Init_UI() {
       searchInput.style.display = "none";
     }
   });
-  $("#show_category").hide();
   initReadMore();
   showPosts();
   start_Periodic_Refresh();
@@ -64,11 +63,14 @@ function doSearch() {
 }
 
 function showPosts() {
+  console.log(selectedCategory);
   $("#actionTitle").text("Chouettes Nouvelles");
   $("#scrollPanel").show();
-  if (selectedCategory!=""||"Toutes les catégories") {
-    $("#show_category").text(`${selectedCategory}`).show(); 
-  } else {
+  if (selectedCategory !== " " && 
+    selectedCategory !== "Toutes les catégories" && 
+    !selectedCategory.match(/^\s*$/)) {
+    $("#show_category").show();
+} else {
     $("#show_category").hide();
   }
   $("#abort").hide();
@@ -132,8 +134,8 @@ function updateDropDownMenu() {
   $("#allCatCmd").on("click", function () {
     showPosts();
     selectedCategory = "";
+    $("#show_category").hide();
     updateDropDownMenu();
-    $("#show_category").hide(); 
     pageManager.reset();
   });
   $(".category").on("click", function () {
@@ -141,6 +143,7 @@ function updateDropDownMenu() {
      selectedCategory = $(this).text().trim();
      updateDropDownMenu();
      $("#show_category").text(`${selectedCategory}`); 
+     $("#show_category").show();
      pageManager.reset();
   });
 }
