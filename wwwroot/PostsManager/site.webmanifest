@@ -1,0 +1,16 @@
+{
+    "name": "Post Manager",
+    "short_name": "Post Manager",
+    "icons": [
+      {
+        "src": "logo.webp",
+        "sizes": "any",
+        "type": "image/webp",
+        "purpose": "any"
+      }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+  }
+  

@@ -50,11 +50,6 @@
     border-radius: 9px;
     align-items: center;
     padding: 8px;
-   /* border: 1px solid #ccc;
-    display: grid;
-    grid-template-columns: 50px auto 50px 30px;
-    width: 100%;
-    padding: 8px;*/
 }
 
 #content {
@@ -263,4 +258,7 @@ label {
 
 .selected {
     background-color: #ccc;
+}
+textarea {
+    white-space: pre-wrap; /* Garde les espaces et les sauts de ligne */
 }
