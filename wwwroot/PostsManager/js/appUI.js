@@ -217,6 +217,7 @@ async function renderEditPostForm(id) {
 
 async function renderDeletePostForm(id) {
   hidePosts();
+  const formattedText = Post.Text.replace(/\n/g, '<br>');
   $("#actionTitle").text("Retrait");
   $("#postForm").show();
   $("#postForm").empty();
@@ -246,7 +247,7 @@ async function renderDeletePostForm(id) {
                       </div>
                       <span class="PostCategory">${Post.Category}</span>
                     <div class="post-summary">
-                      <p class="post-text">${Post.Text}</p>
+                      <p class="post-text">${formattedText }</p>
                       <button class="read-more-btn">Lire plus</button>
                     </div>
                       <hr>
@@ -446,6 +447,7 @@ function checkOverflow($postSummary) {
 
 function renderPost(Post) {
   const formattedDate = formatDate(Post.Creation);
+  const formattedText = Post.Text.replace(/\n/g, '<br>');
   return $(`
     <div class="PostRow" id='${Post.Id}'>
         <div class="PostContainer noselect">
@@ -464,7 +466,7 @@ function renderPost(Post) {
                 </div>
                 <span class="PostCategory">${Post.Category}</span>
                 <div class="post-summary">
-                  <p class="post-text">${Post.Text}</p>
+                  <p class="post-text">${formattedText}</p>
                   <button class="read-more-btn">Lire plus</button>
                 </div>
                 <hr>
