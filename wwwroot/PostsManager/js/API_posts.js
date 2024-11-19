@@ -1,5 +1,6 @@
 
-//https://well-ubiquitous-session.glitch.me
+//"https://well-ubiquitous-session.glitch.me/api/posts"
+//"http://localhost:5000/api/posts"
 class API_Posts {
     static API_URL() { return "http://localhost:5000/api/posts" };
     static initHttpState() {
