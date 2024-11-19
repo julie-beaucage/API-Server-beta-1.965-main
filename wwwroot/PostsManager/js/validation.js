@@ -80,7 +80,7 @@ function initFormValidation() {
                     event.target.setCustomValidity(CustomErrorMessage);
                 else
                     event.target.setCustomValidity(InvalidMessage);
-            //console.log(event.target.name, event.target.validity);
+            console.log(event.target.name, event.target.validity);
         })
     });
 
@@ -132,4 +132,3 @@ function addConflictValidation(serviceUrl, fieldName, submitBtnId) {
     $("#" + submitBtnId).on("click", () => { ConflictTestRequest(serviceUrl, fieldName) });
     $("#" + submitBtnId).parents('form:first').on("submit", function (e) { return !Conflict(); });
 }
-

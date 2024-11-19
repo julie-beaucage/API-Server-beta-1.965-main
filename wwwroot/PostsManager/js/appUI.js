@@ -433,11 +433,6 @@ function initReadMore() {
   });
 }
 
-function checkOverflow($postSummary) {
-  const $postText = $postSummary.find('p');
-  $postText.css('max-height', '60px');  
-  return $postText[0].scrollHeight > $postText.outerHeight(); 
-}
 
 function checkOverflow($postSummary) {
   const $postText = $postSummary.find('p'); 
