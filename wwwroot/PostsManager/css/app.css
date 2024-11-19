@@ -39,6 +39,10 @@
 }
 
 #header {
+    display: grid;
+    grid-template-columns: 50px auto 50px 30px;
+    width: 100%;
+    height: fit-content;
     display: flex;
     flex-wrap: wrap; 
     gap: 10px; 
@@ -84,6 +88,7 @@
     margin: auto;
     width: 100%;
     max-width: 1600px;
+
 }
 ::-webkit-scrollbar {
     width: 16px;
@@ -188,10 +193,14 @@
     color: red;
 }
 
-@media screen and (min-width:650px) {
+@media screen and (max-width: 600px){
 
     .PostLayout {
         grid-template-columns: auto 30%;
+    }
+    .cmdIcon {
+        font-size: 1rem;
+        margin: 4px;
     }
 }
 

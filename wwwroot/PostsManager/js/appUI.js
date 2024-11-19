@@ -157,8 +157,7 @@ async function compileCategories() {
 }   
 async function renderPosts(queryString) {
     let endOfData = false;
-    //queryString += "&sort=category";
-    queryString += "&sort=Creation";
+    queryString += "&sort=Creation,desc";
     if (selectedCategory != "") queryString += "&category=" + selectedCategory;
     if (search != "") queryString += "&keywords=" + search;
     addWaitingGif();
@@ -179,6 +178,7 @@ async function renderPosts(queryString) {
             $(".deleteCmd").on("click", function () {
                 renderDeletePostForm($(this).attr("deletePostId"));
             });
+            initReadMore();
           } else if(isReset) {
             $("#itemsPanel").html(
                 `<div class="noPostsMessage">Aucun post dans la catégorie "${selectedCategory || "toutes les catégories"}" avec la recherche "${search || "aucun mot-clé"}".</div>`
@@ -220,14 +220,7 @@ async function renderEditPostForm(id) {
     }
     removeWaitingGif();
 }
-/*async function renderEditContactForm(id) {
-    showWaitingGif();
-    let contact = await API_GetContact(id);
-    if (contact !== null)
-        renderContactForm(contact);
-    else
-        renderError("Contact introuvable!");
-}*/
+
 async function renderDeletePostForm(id) {
     hidePosts();
     $("#actionTitle").text("Retrait");
@@ -409,34 +402,52 @@ function getFormData($form) {
   });
   return jsonObject;
 }
+function initReadMore() {
+  $(document).on('click', '.read-more-btn', function () {
+    const $postSummary = $(this).closest('.post-summary');
+    const $postText = $postSummary.find('p');
+
+    if ($postText.hasClass('expanded')) {
+      $postText.removeClass('expanded').css('max-height', '60px'); 
+      $(this).text('Lire plus');
+    } else {
+      $postText.addClass('expanded').css('max-height', 'none'); 
+      $(this).text('Lire moins');
+    }
+  });
+}
 
 function renderPost(Post) {
   const formattedDate = formatDate(Post.Creation);
   return $(`
-     <div class="PostRow" id='${Post.Id}'>
+    <div class="PostRow" id='${Post.Id}'>
         <div class="PostContainer noselect">
-            <div class="PostLayout">
-              <div class="post-cover">
-                <img src="${Post.Image}" alt="${Post.Title}" class="post-cover-img" />
-              </div>            </div>
-            <div class="post-icons">
-              <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}"title="Modifier ${Post.Title}"></span>
-              <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}"title="Effacer ${Post.Title}"></span>
-            </div>
-                <div class ="post-body">
-                   <div class="post-title">
-                      <span class="PostTitle">${Post.Title}</span>
-                   </div>
-                   <span class="PostCategory">${Post.Category}</span>
-                   <div class="post-summary">
-                     <p>${Post.Text}</span>
-                    </div>
+          <div class="PostLayout">
+            <div class="Post">
+              <div class="header_post">
+                <img src="${Post.Image}" alt="${Post.Title}" class="post-cover-img" />      
+                <div class="post-icons">
+                  <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}"title="Modifier ${Post.Title}"></span>
+                  <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}"title="Effacer ${Post.Title}"></span>
+                </div>
+              </div> 
+              <div class ="post-body">
+                <div class="post-title">
+                  <span class="PostTitle">${Post.Title}</span>
+                </div>
+                <span class="PostCategory">${Post.Category}</span>
+                <div class="post-summary">
+                  <p class="post-text">${Post.Text}</p>
+                  <button class="read-more-btn">Lire plus</button>
+                </div>
                 <hr>
-            </div>
-            <div class="post-footer">
-                <span> Publié: ${formattedDate}</span>  
               </div>
-        </div>
-    </div>           
+              <div class="post-footer">
+               <span> Publié: ${formattedDate}</span>  
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>           
     `);
 }
